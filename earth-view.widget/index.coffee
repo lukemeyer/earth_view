@@ -1,5 +1,5 @@
-# get random image from list of 100
-command: "curl -so earth-view.widget/images/img.jpg earthview.withgoogle.com/images/wallpaper/"+ Math.floor(Math.random() * (101 - 1) + 1) + ".jpg"
+# parse site for an image id, then build the url and download the image
+command: 'num=$(curl -s earthview.withgoogle.com | grep -E -o "id&#34;\:&#34;([0-9]*)" | grep -E -o "[0-9]{4}"); curl -so earth-view.widget/images/img.jpg www.gstatic.com/prettyearth/assets/full/${num}.jpg'
 
 # Set the refresh frequency (milliseconds).
 refreshFrequency: 200000
@@ -10,7 +10,7 @@ style: """
   color: #fff
   
   .earth
-    height: 100%9
+    height: 100%
     width: 100%
     position: absolute
     z-index:-1
